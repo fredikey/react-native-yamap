@@ -1,8 +1,13 @@
 
 buildscript {
     repositories {
-        jcenter()
+        google()
         mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.3.1")
     }
 }
 
@@ -24,11 +29,14 @@ android {
 }
 
 repositories {
+    google()
     mavenCentral()
+    jcenter()
 }
 
+def _ext = rootProject.ext
+def _reactNativeVersion = _ext.has('reactNative') ? _ext.reactNative : '+'
 dependencies {
-    implementation 'com.google.android.gms:play-services-location:20.0.0'
-    implementation 'com.facebook.react:react-native:+'
-    implementation 'com.yandex.android:maps.mobile:4.2.2-full'
+    implementation "com.facebook.react:react-native:${_reactNativeVersion}"
+    implementation 'com.yandex.android:maps.mobile:4.2.2-lite'
 }

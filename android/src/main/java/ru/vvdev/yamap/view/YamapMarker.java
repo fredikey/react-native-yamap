@@ -1,12 +1,10 @@
 package ru.vvdev.yamap.view;
 
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.os.Looper;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
@@ -26,15 +24,8 @@ import com.yandex.mapkit.map.RotationType;
 import com.yandex.runtime.image.ImageProvider;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Handler;
 
 import ru.vvdev.yamap.models.ReactMapObject;
-import ru.vvdev.yamap.utils.Callback;
-import ru.vvdev.yamap.utils.ImageLoader;
 
 public class YamapMarker extends ReactViewGroup implements MapObjectTapListener, ReactMapObject {
     public Point point;
@@ -42,9 +33,7 @@ public class YamapMarker extends ReactViewGroup implements MapObjectTapListener,
     private float scale = 1;
     private Boolean visible = true;
     private Boolean rotated = false;
-    private int YAMAP_FRAMES_PER_SECOND = 25;
     private PointF markerAnchor = null;
-    private String iconSource;
     private View _childView;
     private PlacemarkMapObject mapObject;
     private ArrayList<View> childs = new ArrayList<>();
@@ -90,11 +79,6 @@ public class YamapMarker extends ReactViewGroup implements MapObjectTapListener,
         updateMarker();
     }
 
-    public void setIconSource(String source) {
-        iconSource = source;
-        updateMarker();
-    }
-
     public void setAnchor(PointF anchor) {
         markerAnchor = anchor;
         updateMarker();
@@ -122,14 +106,6 @@ public class YamapMarker extends ReactViewGroup implements MapObjectTapListener,
                     mapObject.setIconStyle(iconStyle);
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
-            }
-            if (childs.size() == 0) {
-                if (!iconSource.equals("")) {
-                    YamapView parent = (YamapView)getParent();
-                    if (parent!=null) {
-                        parent.setImage(iconSource, mapObject, iconStyle);
-                    }
                 }
             }
         }

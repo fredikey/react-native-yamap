@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
@@ -20,7 +19,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import ru.vvdev.yamap.view.YamapMarker;
-import ru.vvdev.yamap.view.YamapView;
 
 public class YamapMarkerManager extends ViewGroupManager<YamapMarker> {
     public static final String REACT_CLASS = "YamapMarker";
@@ -83,13 +81,6 @@ public class YamapMarkerManager extends ViewGroupManager<YamapMarker> {
     @ReactProp(name = "visible")
     public void setVisible(View view, Boolean visible) {
         castToMarkerView(view).setVisible(visible != null ? visible : true);
-    }
-
-    @ReactProp(name = "source")
-    public void setSource(View view, String source) {
-        if (source != null) {
-            castToMarkerView(view).setIconSource(source);
-        }
     }
 
     @ReactProp(name = "anchor")
