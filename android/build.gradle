@@ -14,12 +14,12 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -38,5 +38,5 @@ def _ext = rootProject.ext
 def _reactNativeVersion = _ext.has('reactNative') ? _ext.reactNative : '+'
 dependencies {
     implementation "com.facebook.react:react-native:${_reactNativeVersion}"
-    implementation 'com.yandex.android:maps.mobile:4.2.2-lite'
+    implementation 'com.yandex.android:maps.mobile:4.4.0-lite'
 }

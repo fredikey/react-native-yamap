@@ -15,6 +15,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.ScreenPoint;
 import com.yandex.mapkit.geometry.BoundingBox;
+import com.yandex.mapkit.geometry.Geometry;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.logo.Alignment;
 import com.yandex.mapkit.logo.HorizontalAlignment;
@@ -188,7 +189,7 @@ public class YamapView extends MapView implements CameraListener, InputListener,
         fitMarkers(points);
     }
 
-    BoundingBox calculateBoundingBox(ArrayList<Point> points) {
+    Geometry calculateBoundingBox(ArrayList<Point> points) {
         double minLon = points.get(0).getLongitude();
         double maxLon = points.get(0).getLongitude();
         double minLat = points.get(0).getLatitude();
@@ -215,8 +216,8 @@ public class YamapView extends MapView implements CameraListener, InputListener,
         Point southWest = new Point(minLat, minLon);
         Point northEast = new Point(maxLat, maxLon);
 
-        BoundingBox boundingBox = new BoundingBox(southWest, northEast);
-        return boundingBox;
+        Geometry geometry = Geometry.fromBoundingBox(new BoundingBox(southWest, northEast));
+        return geometry;
     }
 
     public void fitMarkers(ArrayList<Point> points) {
@@ -316,11 +317,6 @@ public class YamapView extends MapView implements CameraListener, InputListener,
         int horizontalPadding = (params.hasKey("horizontal") && !params.isNull("horizontal")) ? params.getInt("horizontal") : 0;
         int verticalPadding = (params.hasKey("vertical") && !params.isNull("vertical")) ? params.getInt("vertical") : 0;
         getMap().getLogo().setPadding(new Padding(horizontalPadding, verticalPadding));
-    }
-
-    public void setMaxFps(float fps) {
-        maxFps = fps;
-        getMapWindow().setMaxFps(maxFps);
     }
 
     public void setInteractive(boolean interactive) {
